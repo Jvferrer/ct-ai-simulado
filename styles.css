@@ -458,6 +458,24 @@ h2 {
   padding: 14px 16px;
 }
 
+.site-footer {
+  color: var(--muted);
+  display: grid;
+  gap: 4px;
+  line-height: 1.5;
+  margin-top: 24px;
+  padding: 8px 4px 0;
+  text-align: center;
+}
+
+.site-footer strong {
+  color: var(--text);
+}
+
+.site-footer small {
+  color: var(--muted);
+}
+
 .badge {
   border-radius: 999px;
   font-size: 0.78rem;

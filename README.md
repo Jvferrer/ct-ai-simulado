@@ -19,3 +19,11 @@ Abra o arquivo `index.html` no navegador e clique em **Iniciar novo simulado**.
 - Indicadores de aprendizado com capítulo em que você mais acerta e capítulo para revisar primeiro.
 
 As questões são autorais para estudo e foram alinhadas aos capítulos e objetivos de aprendizagem da syllabus CT-AI v2.0. Elas não são questões oficiais da ISTQB.
+
+## Direitos autorais e licença
+
+Copyright © 2026 João Ferrer.
+
+Este projeto é licenciado sob a licença MIT. Isso permite uso, cópia, modificação e distribuição gratuita do software, desde que o aviso de copyright e a licença sejam preservados. Consulte o arquivo `LICENSE`.
+
+As questões e explicações são autorais para fins de estudo e não representam material oficial da ISTQB.
