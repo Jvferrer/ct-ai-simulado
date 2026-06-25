@@ -567,6 +567,7 @@ h2 {
 
   .question-panel {
     min-height: auto;
+    padding-bottom: 120px;
   }
 
   .question-meta {

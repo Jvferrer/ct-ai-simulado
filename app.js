@@ -917,7 +917,8 @@ function renderProgress() {
 
 function renderTimer() {
   if (!currentAttempt) {
-    elements.timer.textContent = `${EXAM.defaultMinutes}:00`;
+    const minutes = elements.extraTime.checked ? EXAM.extraMinutes : EXAM.defaultMinutes;
+    elements.timer.textContent = `${minutes}:00`;
     return;
   }
 
@@ -994,6 +995,7 @@ function answerQuestion(optionIndex) {
 
   currentAttempt.answers[currentIndex] = optionIndex;
   renderQuestion();
+  elements.feedback.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 
 function startTimer() {
@@ -1016,6 +1018,16 @@ function startTimer() {
 }
 
 function startAttempt() {
+  const score = calculateScore();
+  const hasActiveAttempt = currentAttempt && !currentAttempt.finished && score.answered > 0;
+
+  if (
+    hasActiveAttempt &&
+    !window.confirm("Você já tem uma tentativa em andamento. Deseja abandonar essa tentativa e iniciar outra?")
+  ) {
+    return;
+  }
+
   currentAttempt = createAttempt();
   currentIndex = 0;
   elements.resultPanel.className = "result-panel hidden";
@@ -1027,10 +1039,20 @@ function startAttempt() {
 function finishAttempt() {
   if (!currentAttempt || currentAttempt.finished) return;
 
+  const score = calculateScore();
+  const unanswered = EXAM.questionCount - score.answered;
+
+  if (
+    unanswered > 0 &&
+    !currentAttempt.timedOut &&
+    !window.confirm(`Ainda existem ${unanswered} questão(ões) sem resposta. Deseja finalizar mesmo assim?`)
+  ) {
+    return;
+  }
+
   currentAttempt.finished = true;
   clearInterval(timerId);
 
-  const score = calculateScore();
   const passed = score.points >= EXAM.passingPoints;
   const historyItem = {
     id: currentAttempt.id,
@@ -1059,6 +1081,7 @@ function resetHistory() {
   renderDashboard();
 }
 
+elements.extraTime.addEventListener("change", renderTimer);
 elements.startBtn.addEventListener("click", startAttempt);
 elements.prevBtn.addEventListener("click", () => {
   currentIndex = Math.max(0, currentIndex - 1);
