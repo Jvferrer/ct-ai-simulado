@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulado CT-AI 2.0</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">ISTQB CT-AI v2.0</p>
+          <h1>Simulado CT-AI para estudar como prova oficial</h1>
+          <p class="hero-text">
+            Treine com 40 questões autorais alinhadas à syllabus CT-AI 2.0, feedback imediato,
+            pontuação por capítulo e dashboard de tentativas salvo neste navegador.
+          </p>
+        </div>
+        <div class="hero-card">
+          <span class="label">Regra do simulado</span>
+          <strong>29 / 44 pontos</strong>
+          <small>65% para aprovação, 40 questões, 60 minutos.</small>
+        </div>
+      </section>
+
+      <section class="control-panel">
+        <div class="panel-card">
+          <span class="label">Modo</span>
+          <h2>Preparação CT-AI</h2>
+          <p>
+            O feedback aparece logo após clicar na alternativa para acelerar o aprendizado. Ao finalizar,
+            o resultado indica aprovado ou reprovado.
+          </p>
+        </div>
+        <div class="panel-actions">
+          <label class="toggle">
+            <input id="extra-time" type="checkbox" />
+            <span>Usar tempo extra de idioma não nativo (75 min)</span>
+          </label>
+          <button id="start-btn" class="primary-button">Iniciar novo simulado</button>
+        </div>
+      </section>
+
+      <section class="stats-grid" aria-label="Dashboard de tentativas">
+        <article class="stat-card">
+          <span class="label">Execuções</span>
+          <strong id="runs-stat">0</strong>
+        </article>
+        <article class="stat-card">
+          <span class="label">Aprovado / Reprovado</span>
+          <strong id="pass-fail-stat">0 / 0</strong>
+        </article>
+        <article class="stat-card">
+          <span class="label">Melhor pontuação</span>
+          <strong id="best-stat">0 / 44</strong>
+        </article>
+        <article class="stat-card">
+          <span class="label">Última tentativa</span>
+          <strong id="last-stat">-</strong>
+        </article>
+        <article class="stat-card insight-card">
+          <span class="label">Mais acertei</span>
+          <strong id="best-chapter-stat">-</strong>
+          <small id="best-chapter-detail">Finalize uma tentativa para ver.</small>
+        </article>
+        <article class="stat-card insight-card">
+          <span class="label">Revisar primeiro</span>
+          <strong id="focus-chapter-stat">-</strong>
+          <small id="focus-chapter-detail">O sistema aprende com seus erros.</small>
+        </article>
+      </section>
+
+      <section class="exam-layout">
+        <aside class="sidebar">
+          <div class="timer-card">
+            <span class="label">Tempo restante</span>
+            <strong id="timer">60:00</strong>
+            <div class="progress-track">
+              <div id="progress-bar" class="progress-bar"></div>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <span class="label">Progresso</span>
+            <strong id="progress-text">0 / 40 respondidas</strong>
+            <p id="score-text">0 / 44 pontos</p>
+            <p id="alternatives-text">Total de alternativas: 160</p>
+          </div>
+
+          <div class="chapter-card">
+            <span class="label">Distribuição oficial simulada</span>
+            <div id="chapter-breakdown" class="chapter-list"></div>
+          </div>
+
+          <div class="agents-card">
+            <span class="label">Agentes de estudo</span>
+            <ul id="agent-tips"></ul>
+          </div>
+        </aside>
+
+        <section class="question-panel" aria-live="polite">
+          <div id="empty-state" class="empty-state">
+            <h2>Pronto para treinar?</h2>
+            <p>
+              Clique em iniciar para gerar uma tentativa. Você verá a resposta certa na hora e poderá
+              navegar pelas questões sem perder o histórico.
+            </p>
+            <div class="study-note">
+              <strong>Jeito tranquilo de estudar:</strong>
+              responda, leia a explicação, siga para a próxima e use o painel para revisar os capítulos
+              com mais erro antes de repetir.
+            </div>
+          </div>
+
+          <div id="question-state" class="hidden">
+            <div class="question-meta">
+              <span id="question-counter"></span>
+              <span id="question-topic"></span>
+            </div>
+            <h2 id="question-title"></h2>
+            <div id="options" class="options"></div>
+            <div id="feedback" class="feedback hidden"></div>
+            <div class="question-actions">
+              <button id="prev-btn" class="secondary-button">Anterior</button>
+              <button id="next-btn" class="secondary-button">Próxima</button>
+              <button id="finish-btn" class="primary-button">Finalizar tentativa</button>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section id="result-panel" class="result-panel hidden">
+        <div>
+          <span class="label">Resultado</span>
+          <h2 id="result-title"></h2>
+          <p id="result-details"></p>
+        </div>
+        <button id="review-btn" class="secondary-button">Revisar questões</button>
+      </section>
+
+      <section class="history-panel">
+        <div class="section-heading">
+          <div>
+            <span class="label">Histórico local</span>
+            <h2>Tentativas recentes</h2>
+          </div>
+          <button id="reset-history-btn" class="ghost-button">Limpar histórico</button>
+        </div>
+        <div id="history-list" class="history-list"></div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
