@@ -624,7 +624,6 @@ const elements = {
   scoreText: document.querySelector("#score-text"),
   alternativesText: document.querySelector("#alternatives-text"),
   chapterBreakdown: document.querySelector("#chapter-breakdown"),
-  agentTips: document.querySelector("#agent-tips"),
   emptyState: document.querySelector("#empty-state"),
   questionState: document.querySelector("#question-state"),
   questionCounter: document.querySelector("#question-counter"),
@@ -904,37 +903,6 @@ function renderChapterBreakdown() {
     .join("");
 }
 
-function renderAgentTips() {
-  const score = calculateScore();
-  const answered = score.answered;
-  const weakChapter = chapterTargets
-    .map((target) => {
-      const stats = score.byChapter.get(target.chapter);
-      return {
-        ...target,
-        ratio: stats.answered ? stats.correct / stats.answered : 1,
-      };
-    })
-    .filter((target) => !answered || target.answered > 0)
-    .sort((a, b) => a.ratio - b.ratio)[0];
-
-  const historyFocus = aggregateHistoryPerformance(getHistory()).focus;
-  const focus =
-    answered && weakChapter
-      ? `Cap. ${weakChapter.chapter} (${weakChapter.title})`
-      : historyFocus
-        ? `Cap. ${historyFocus.chapter} (${historyFocus.title})`
-        : "os capítulos que errou";
-  const tips = [
-    `<strong>QA:</strong> quando errar, pergunte qual risco a alternativa correta mitiga.`,
-    `<strong>Produto:</strong> transforme a explicação em um critério de aceite simples.`,
-    `<strong>Engenharia:</strong> conecte o conceito ao ciclo de ML: dados, modelo, deploy ou monitoramento.`,
-    `<strong>Plano calmo:</strong> foco atual: ${focus}. Revise esse tema antes de repetir.`,
-  ];
-
-  elements.agentTips.innerHTML = tips.map((tip) => `<li>${tip}</li>`).join("");
-}
-
 function renderProgress() {
   const score = calculateScore();
   const percentage = currentAttempt ? (score.answered / EXAM.questionCount) * 100 : 0;
@@ -945,7 +913,6 @@ function renderProgress() {
   elements.progressBar.style.width = `${percentage}%`;
 
   renderChapterBreakdown();
-  renderAgentTips();
 }
 
 function renderTimer() {
