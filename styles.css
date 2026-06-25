@@ -13,7 +13,38 @@
   --warning: #996300;
   --warning-bg: #fff5d6;
   --surface: rgba(255, 255, 255, 0.94);
+  --option-bg: #ffffff;
+  --option-letter-bg: #eef3ff;
+  --progress-bg: #e8edf7;
+  --soft-bg: #f7f9fe;
+  --insight-bg: linear-gradient(180deg, #ffffff, #f8fbff);
+  --action-bg: linear-gradient(180deg, rgba(255, 255, 255, 0), #ffffff 24%);
   --shadow: 0 20px 50px rgba(32, 47, 78, 0.12);
+}
+
+html[data-theme="dark"] {
+  --bg: #080d18;
+  --card: #111827;
+  --text: #eef4ff;
+  --muted: #a9b6ca;
+  --line: #263247;
+  --primary: #7aa2ff;
+  --primary-dark: #a9c2ff;
+  --success: #6ee7a8;
+  --success-bg: rgba(20, 122, 69, 0.18);
+  --danger: #ff9b92;
+  --danger-bg: rgba(180, 35, 24, 0.18);
+  --warning: #ffd166;
+  --warning-bg: rgba(255, 209, 102, 0.16);
+  --surface: rgba(17, 24, 39, 0.9);
+  --option-bg: #0f172a;
+  --option-letter-bg: rgba(122, 162, 255, 0.16);
+  --progress-bg: #1d2940;
+  --soft-bg: rgba(122, 162, 255, 0.08);
+  --insight-bg: linear-gradient(180deg, #111827, #0f172a);
+  --action-bg: linear-gradient(180deg, rgba(17, 24, 39, 0), #111827 24%);
+  --shadow: 0 20px 55px rgba(0, 0, 0, 0.36);
+  color-scheme: dark;
 }
 
 * {
@@ -24,6 +55,7 @@ body {
   margin: 0;
   background:
     radial-gradient(circle at top left, rgba(37, 87, 214, 0.16), transparent 34rem),
+    radial-gradient(circle at bottom right, rgba(122, 162, 255, 0.1), transparent 28rem),
     var(--bg);
   color: var(--text);
   font-family:
@@ -72,7 +104,7 @@ button:disabled {
 .result-panel,
 .history-panel {
   background: var(--surface);
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--line);
   border-radius: 28px;
   box-shadow: var(--shadow);
   padding: 28px;
@@ -195,7 +227,7 @@ h2 {
 
 .secondary-button,
 .ghost-button {
-  background: #fff;
+  background: var(--option-bg);
   border: 1px solid var(--line);
   color: var(--text);
 }
@@ -223,7 +255,7 @@ h2 {
 }
 
 .insight-card {
-  background: linear-gradient(180deg, #ffffff, #f8fbff);
+  background: var(--insight-bg);
 }
 
 .exam-layout {
@@ -241,7 +273,7 @@ h2 {
 }
 
 .progress-track {
-  background: #e8edf7;
+  background: var(--progress-bg);
   border-radius: 999px;
   height: 10px;
   overflow: hidden;
@@ -295,7 +327,7 @@ h2 {
 }
 
 .study-note {
-  background: #f7f9fe;
+  background: var(--soft-bg);
   border: 1px solid var(--line);
   border-radius: 18px;
   color: var(--muted);
@@ -332,7 +364,7 @@ h2 {
 }
 
 .option-button {
-  background: #fff;
+  background: var(--option-bg);
   border: 1px solid var(--line);
   border-radius: 18px;
   color: var(--text);
@@ -351,7 +383,7 @@ h2 {
 
 .option-letter {
   align-items: center;
-  background: #eef3ff;
+  background: var(--option-letter-bg);
   border-radius: 50%;
   color: var(--primary);
   display: inline-flex;
@@ -402,7 +434,7 @@ h2 {
 
 .question-actions {
   align-items: center;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0), #ffffff 24%);
+  background: var(--action-bg);
   border-top: 1px solid var(--line);
   display: grid;
   gap: 12px;
@@ -450,7 +482,7 @@ h2 {
 
 .history-item {
   align-items: center;
-  background: #fff;
+  background: var(--card);
   border: 1px solid var(--line);
   border-radius: 16px;
   display: flex;

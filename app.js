@@ -5,6 +5,7 @@ const EXAM = {
   defaultMinutes: 60,
   extraMinutes: 75,
   storageKey: "ct-ai-simulado-history-v1",
+  themeStorageKey: "ct-ai-simulado-theme",
 };
 
 const chapterTargets = [
@@ -609,6 +610,7 @@ let timerId = null;
 
 const elements = {
   extraTime: document.querySelector("#extra-time"),
+  themeToggle: document.querySelector("#theme-toggle"),
   startBtn: document.querySelector("#start-btn"),
   runsStat: document.querySelector("#runs-stat"),
   passFailStat: document.querySelector("#pass-fail-stat"),
@@ -641,6 +643,30 @@ const elements = {
   resetHistoryBtn: document.querySelector("#reset-history-btn"),
   historyList: document.querySelector("#history-list"),
 };
+
+function getPreferredTheme() {
+  const savedTheme = localStorage.getItem(EXAM.themeStorageKey);
+
+  if (savedTheme === "dark" || savedTheme === "light") {
+    return savedTheme;
+  }
+
+  return window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  localStorage.setItem(EXAM.themeStorageKey, theme);
+
+  const isDark = theme === "dark";
+  elements.themeToggle.textContent = isDark ? "Modo claro" : "Modo escuro";
+  elements.themeToggle.setAttribute("aria-pressed", String(isDark));
+}
+
+function toggleTheme() {
+  const currentTheme = document.documentElement.dataset.theme || getPreferredTheme();
+  applyTheme(currentTheme === "dark" ? "light" : "dark");
+}
 
 function shuffle(list) {
   const shuffled = [...list];
@@ -1081,6 +1107,7 @@ function resetHistory() {
   renderDashboard();
 }
 
+elements.themeToggle.addEventListener("click", toggleTheme);
 elements.extraTime.addEventListener("change", renderTimer);
 elements.startBtn.addEventListener("click", startAttempt);
 elements.prevBtn.addEventListener("click", () => {
@@ -1099,6 +1126,7 @@ elements.reviewBtn.addEventListener("click", () => {
 });
 elements.resetHistoryBtn.addEventListener("click", resetHistory);
 
+applyTheme(getPreferredTheme());
 renderDashboard();
 renderTimer();
 renderProgress();
